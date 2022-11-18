@@ -1,0 +1,45 @@
+CREATE TABLE [dbo].[Status] (
+    [Id] [int] NOT NULL IDENTITY,
+    [Name] [nvarchar](max),
+    [StatusTypeId] [int] NOT NULL,
+    CONSTRAINT [PK_dbo.Status] PRIMARY KEY ([Id])
+)
+CREATE INDEX [IX_StatusTypeId] ON [dbo].[Status]([StatusTypeId])
+CREATE TABLE [dbo].[StatusTypes] (
+    [Id] [int] NOT NULL IDENTITY,
+    [Name] [nvarchar](max),
+    [Color] [nvarchar](max),
+    CONSTRAINT [PK_dbo.StatusTypes] PRIMARY KEY ([Id])
+)
+CREATE TABLE [dbo].[Tasks] (
+    [Id] [int] NOT NULL IDENTITY,
+    [Title] [nvarchar](max),
+    [Descirption] [nvarchar](max),
+    [CreatedDate] [datetime] NOT NULL,
+    [StatusId] [int] NOT NULL,
+    [UserId] [int] NOT NULL,
+    CONSTRAINT [PK_dbo.Tasks] PRIMARY KEY ([Id])
+)
+CREATE INDEX [IX_StatusId] ON [dbo].[Tasks]([StatusId])
+CREATE INDEX [IX_UserId] ON [dbo].[Tasks]([UserId])
+CREATE TABLE [dbo].[Users] (
+    [Id] [int] NOT NULL IDENTITY,
+    [Fullname] [nvarchar](max),
+    [Username] [nvarchar](max),
+    [Password] [nvarchar](max),
+    [StatusId] [int] NOT NULL,
+    CONSTRAINT [PK_dbo.Users] PRIMARY KEY ([Id])
+)
+CREATE INDEX [IX_StatusId] ON [dbo].[Users]([StatusId])
+ALTER TABLE [dbo].[Status] ADD CONSTRAINT [FK_dbo.Status_dbo.StatusTypes_StatusTypeId] FOREIGN KEY ([StatusTypeId]) REFERENCES [dbo].[StatusTypes] ([Id]) ON DELETE CASCADE
+ALTER TABLE [dbo].[Tasks] ADD CONSTRAINT [FK_dbo.Tasks_dbo.Status_StatusId] FOREIGN KEY ([StatusId]) REFERENCES [dbo].[Status] ([Id]) ON DELETE CASCADE
+ALTER TABLE [dbo].[Tasks] ADD CONSTRAINT [FK_dbo.Tasks_dbo.Users_UserId] FOREIGN KEY ([UserId]) REFERENCES [dbo].[Users] ([Id]) ON DELETE CASCADE
+ALTER TABLE [dbo].[Users] ADD CONSTRAINT [FK_dbo.Users_dbo.Status_StatusId] FOREIGN KEY ([StatusId]) REFERENCES [dbo].[Status] ([Id]) ON DELETE CASCADE
+CREATE TABLE [dbo].[__MigrationHistory] (
+    [MigrationId] [nvarchar](150) NOT NULL,
+    [ContextKey] [nvarchar](300) NOT NULL,
+    [Model] [varbinary](max) NOT NULL,
+    [ProductVersion] [nvarchar](32) NOT NULL,
+    CONSTRAINT [PK_dbo.__MigrationHistory] PRIMARY KEY ([MigrationId], [ContextKey])
+)
+

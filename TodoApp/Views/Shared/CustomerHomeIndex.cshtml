@@ -1,0 +1,59 @@
+﻿@using TodoApp.Models;
+@{
+    User sessionValue = Session["userLogin"] as User;
+}
+
+
+
+<div class="col-xl-5 col-lg-12 pt-4">
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="card widget-flat">
+                <div class="card-body">
+                    <div class="float-right">
+                        <i class="mdi mdi-cart-plus widget-icon bg-success-lighten text-success"></i>
+                    </div>
+                    <h5 class="text-muted font-weight-normal mt-0" title="Number of Orders">Total Tasks</h5>
+                    <h3 class="mt-3 mb-3"> @sessionValue.Task.Count() 
+                    </h3>
+                    <p class="mb-0 text-muted">
+                        <span class="text-danger mr-2"><i class="mdi mdi-arrow-down-bold"></i> 1.08%</span>
+                        <span class="text-nowrap">Since last month</span>
+                    </p>
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+        </div> <!-- end col-->
+
+        <div class="col-lg-3">
+            <div class="card widget-flat">
+                <div class="card-body">
+                    <div class="float-right">
+                        <i class="mdi mdi-cart-plus widget-icon bg-success-lighten text-success"></i>
+                    </div>
+                    <h5 class="text-muted font-weight-normal mt-0" title="Number of Orders">In Progress</h5>
+                    <h3 class="mt-3 mb-3"> @sessionValue.Task.Where(x => x.StatusId == 1).Count() </h3>
+                    <p class="mb-0 text-muted">
+                        <span class="text-danger mr-2"><i class="mdi mdi-arrow-down-bold"></i> 1.08%</span>
+                        <span class="text-nowrap">Since last month</span>
+                    </p>
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+        </div> <!-- end col-->
+
+        <div class="col-lg-3">
+            <div class="card widget-flat">
+                <div class="card-body">
+                    <div class="float-right">
+                        <i class="mdi mdi-cart-plus widget-icon bg-success-lighten text-success"></i>
+                    </div>
+                    <h5 class="text-muted font-weight-normal mt-0" title="Number of Orders">Done</h5>
+                    <h3 class="mt-3 mb-3"> @sessionValue.Task.Where(x => x.StatusId == 3).Count() </h3>
+                    <p class="mb-0 text-muted">
+                        <span class="text-danger mr-2"><i class="mdi mdi-arrow-down-bold"></i> 1.08%</span>
+                        <span class="text-nowrap">Since last month</span>
+                    </p>
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+        </div> <!-- end col-->
+    </div>
+</div>

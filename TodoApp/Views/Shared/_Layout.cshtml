@@ -1,0 +1,64 @@
+﻿@using TodoApp.Models;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Log In </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
+    <meta content="Coderthemes" name="author" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="~/Bootstrap_4x/dist/modern/assets/images/favicon.ico">
+    @*~/Bootstrap_4x/src/assets/images/favicon.ico*@
+    @*~/Bootstrap_4x/dist/modern/assets/images/favicon.ico*@
+    @*assets/images/favicon.ico*@
+    @*assets/css/icons.min.css*@
+    <!-- App css -->
+    <link href="~/Bootstrap_4x/dist/modern/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Bootstrap_4x/dist/modern/assets/css/app-modern.min.css" rel="stylesheet" type="text/css" id="light-style" />
+    <link href="~/Bootstrap_4x/dist/modern/assets/css/app-modern-dark.min.css" rel="stylesheet" type="text/css" id="dark-style" />
+
+
+
+    @*~/Bootstrap_4x/src/assets/css/app-modern-dark.min.css*@
+
+    @*~/Bootstrap_4x/src/assets/css/icons.min.css*@
+
+</head>
+
+<body class="loading authentication-bg" data-layout-config='{"darkMode":false}'>
+    <div class="account-pages mt-5 mb-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-5">
+                    <div class="card">
+                        <div class="card-body p-4">
+                            @RenderBody()
+                        </div> <!-- end card-body -->
+
+                    </div>
+                    <!-- end card -->
+
+                    
+                    <!-- end row -->
+
+                </div> <!-- end col -->
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- end container -->
+    </div>
+    <!-- end page -->
+
+    <footer class="footer footer-alt">
+        2018 - 2020 © Hyper - Coderthemes.com
+    </footer>
+
+    <!-- bundle -->
+    <script src="~/Bootstrap_4x/dist/modern/assets/js/vendor.min.js"></script>
+    @*~/Bootstrap_4x/src/assets/js/vendor.min.js*@
+    <script src="~/Bootstrap_4x/dist/modern/assets/js/app.min.js"></script>
+    @*~/Bootstrap_4x/src/assets/js/app.min.js*@
+
+</body>
+</html>

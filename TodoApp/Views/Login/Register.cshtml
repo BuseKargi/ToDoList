@@ -1,0 +1,34 @@
+﻿@{
+    ViewBag.Title = "Register";
+}
+
+@if (ViewBag.UsernameError != null)
+{
+    <p style="color:red" >@ViewBag.UsernameError</p>
+}
+
+<div class="text-center w-75 m-auto">
+    <h4 class="text-dark-50 text-center mt-0 font-weight-bold">Sign Up</h4>
+    <p class="text-muted mb-4">Enter your fullname, email address and password to access admin panel.</p>
+</div>
+@using (Html.BeginForm("Register", "Login", FormMethod.Post))
+{
+    <div class="form-group">
+        <label>Fullname</label>
+        <input type="text" class="form-control" name="Fullname" required/>
+    </div>
+    <div class="form-group">
+        <label>Username</label>
+        <input type="text" class="form-control" name="Username" required>
+    </div>
+    <div class="form-group">
+        <label>Password</label>
+        <input type="password" class="form-control" name="Password" required/>
+    </div>
+    <button type="submit" class="btn btn-primary">Register</button>
+}
+<div class="row mt-3">
+    <div class="col-12 text-center">
+        <p class="text-muted">Don't have an account? <a href="/Login/Index" class="text-muted ml-1"><b>Sign In</b></a></p>
+    </div> <!-- end col -->
+</div>

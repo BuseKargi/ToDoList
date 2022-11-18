@@ -1,0 +1,143 @@
+﻿@model TodoApp.Models.TaskStatusList
+@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<div class="content">
+
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+
+                <h4 class="page-title">
+
+                    <a href="/Task/Create" class="btn btn-success btn-sm ml-3">Add New</a>
+                </h4>
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+
+    <div class="row">
+
+        <div class="col-12">
+
+            <div class="board">
+                @foreach (var durum in Model.Status)
+                {
+                    <div class="tasks" data-plugin="dragula" data-containers='["task-list-one", "task-list-two", "task-list-three", "task-list-four"]'>
+                        <h5 class="mt-0 task-header">@durum.Name (@Model.Task.Where(x => x.StatusId == durum.Id).Count())</h5>
+                        <div id="task-list-one" class="task-list-items">
+                            @foreach (var task in Model.Task.Where(x => x.StatusId == durum.Id))
+                            {
+                                <!-- Task Item -->
+                                <div class="card mb-0">
+                                    <div class="card-body p-3">
+                                        <small class="float-right text-muted"> @task.CreatedDate.Value.ToString("dd MMM yyyy") </small>
+                                        <span class="badge badge-danger">High</span>
+
+                                        <h5 class="mt-2 mb-2">
+                                            <a href="#" data-toggle="modal" data-target="#task-detail-modal" class="text-body">@task.Title</a>
+                                        </h5>
+
+                                        <p class="mb-0">
+                                            <span>
+                                        <p>@Html.Raw(task.Description)</p></span>
+                                        <span class="pr-2 text-nowrap mb-2 d-inline-block">
+                                            <i class="mdi mdi-briefcase-outline text-muted"></i>
+
+                                        </span>
+                                        <span class="text-nowrap mb-2 d-inline-block">
+                                            <i class="mdi mdi-comment-multiple-outline text-muted"></i>
+
+                                        </span>
+                                        </p>
+
+                                        <div class="dropdown float-right">
+                                            <a href="#" class="dropdown-toggle text-muted arrow-none" data-toggle="dropdown" aria-expanded="false">
+                                                <i class="mdi mdi-dots-vertical font-18"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <!-- item-->
+                                                <a href="/Task/Edit/@task.Id" class="dropdown-item"><i class="mdi mdi-pencil mr-1"></i>Edit</a>
+                                                <!-- item-->
+                                                <a href="/Task/Delete/@task.Id" class="dropdown-item"><i class="mdi mdi-delete mr-1"></i>Delete</a>
+                                                <!-- item-->
+                                                <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-exit-to-app mr-1"></i>Leave</a>
+                                            </div>
+                                        </div>
+
+                                        <p class="mb-0">
+                                            <span class="align-middle">@task.User.Fullname</span>
+                                        </p>
+                                    </div> <!-- end card-body -->
+                                </div>
+                                <!-- Task Item End -->
+
+                            }
+                        </div> <!-- end company-list-1-->
+                    </div>
+                }
+
+            </div> <!-- end .board-->
+
+
+        </div> <!-- end col -->
+
+    </div>
+
+    <!-- end row-->
+
+</div> <!-- End Content -->
+<!-- Footer Start -->
+
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/toastr.min.js"></script>
+<script src="~/Scripts/toastr.config.js"></script>
+
+
+<script type="text/javascript">
+    var data = '@TempData["toast"]'
+    if (data !=null) {
+
+        $(document).ready(function () {
+            $("#btnEditContact").click(function () {
+                SaveEdit();
+            });
+        });
+        function SaveEdit() {
+            var Id = $("#Id").val();
+            var title = $("#Title").val();
+            var description = $("#txtDescription").val();
+            var statusId = $("#StatusId").val();
+
+            var model = { Id: Id, Title: title, Description: description, StatusId: statusId };
+
+            $.ajax({
+                async: true,
+                url: '/Task/Edit',
+                type: 'POST',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify(model),
+                success: function (response) {
+                    if (response.success != false) {
+                        window.setTimeout(function () { window.location.href = '/Task'; }, 0000);
+                        toastr.success(response.message, 'Success Alert', { timeOut: 4000 });
+                    }
+                    else {
+                        toastr.info(response.message, 'Information Alert', { timeOut: 3000 });
+                    }
+                },
+                error: function () {
+                    toastr.error("There is some problem", 'Error Alert', { timeOut: 3000 });
+                }
+            });
+        }
+    }
+</script>

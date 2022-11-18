@@ -1,0 +1,62 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+@*<form action="#">
+    @using (Html.BeginForm("Index", "Login", FormMethod.Post))
+    {
+
+        <div class="form-group">
+            <label for="username">User Name</label>
+            <input name="Username" type="text" placeholder="Enter your username" />
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+
+            <div class="input-group input-group-merge">
+                <input name="Password" type="password" placeholder="Enter your password" />
+                <div class="input-group-append" data-password="false">
+                    <div class="input-group-text">
+                        <span class="password-eye"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group mb-3">
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="checkbox-signin" checked>
+                <label class="custom-control-label" for="checkbox-signin">Remember me</label>
+                <a href="Register" class="text-muted float-right"><small>Forgot your password?</small></a>
+
+            </div>
+        </div>
+
+        <div class="form-group mb-0 text-center">
+            <button type="submit" class="btn btn-primary">Log In</button>
+        </div>
+
+    }*@
+<div class="text-center w-75 m-auto">
+    <h4 class="text-dark-50 text-center mt-0 font-weight-bold">Sign In</h4>
+    <p class="text-muted mb-4">Enter your fullname, email address and password to access admin panel.</p>
+</div>
+
+@using (Html.BeginForm("Index", "Login", FormMethod.Post))
+{
+
+    <div class="form-group">
+        <label>Username</label>
+        <input type="text" class="form-control" name="Username" required>
+    </div>
+    <div class="form-group">
+        <label>Password</label>
+        <input type="password" class="form-control" name="Password" required/>
+    </div>
+    <button type="submit" class="btn btn-primary">Log in </button>
+}
+@*</form>*@
+<div class="row mt-3">
+    <div class="col-12 text-center">
+        <p class="text-muted">Don't have an account? <a href="/Login/Register" class="text-muted ml-1"><b>Sign Up</b></a></p>
+    </div> <!-- end col -->
+</div>

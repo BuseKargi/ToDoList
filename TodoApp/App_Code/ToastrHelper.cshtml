@@ -1,0 +1,63 @@
+﻿
+
+@helper ProcessToastrs()
+{
+    List<(DateTime Date, string sessionId, TodoApp.Toastr Toastr)> toastrs = TodoApp.ToasterServices.ReadAndRemoveTaskQueue();
+    if (toastrs != null && toastrs.Count > 0)
+    {
+        foreach (var item in toastrs)
+        {   
+            @ShowToastr(item.Toastr)
+        }
+    }
+}
+
+@helper ShowToastr(TodoApp.Toastr item)
+{
+    switch (item.Type)
+    {
+        case TodoApp.ToastrType.Info:
+            ToastrInfo(item.Message, item.Title);
+            break;
+        case TodoApp.ToastrType.Success:
+            ToastrSuccess(item.Message, item.Title);
+            break;
+        case TodoApp.ToastrType.Warning:
+            ToastrWarning(item.Message, item.Title);
+            break;
+        case TodoApp.ToastrType.Error:
+            ToastrError(item.Message, item.Title);
+            break;
+        default:
+            ToastrInfo(item.Message, item.Title);
+            break;
+    }
+}
+
+@helper ToastrInfo(string message, string title)
+{
+    <script>
+        toastr.info('@message', '@title');
+    </script>
+}
+
+@helper ToastrWarning(string message, string title)
+{
+    <script>
+        toastr.warning('@message', '@title');
+    </script>
+}
+
+@helper ToastrSuccess(string message, string title)
+{
+    <script>
+        toastr.success('@message', '@title');
+    </script>
+}
+
+@helper ToastrError(string message, string title)
+{
+    <script>
+        toastr.error('@message', '@title');
+    </script>
+}

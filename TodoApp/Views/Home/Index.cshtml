@@ -1,0 +1,122 @@
+﻿@model TodoApp.Models.TaskStatusList
+@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+@foreach (var status in Model.Status)
+{
+    //GOD
+    if (status.Id == 6)
+    {
+        <div class="col-xl-5 col-lg-12 pt-4">
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="card widget-flat">
+                        <div class="card-body">
+                            <div class="float-right">
+                                <i class="mdi mdi-account-multiple widget-icon"></i>
+                            </div>
+                            <h5 class="text-muted font-weight-normal mt-0" title="Number of Customers">User Number</h5>
+                            <h3 class="mt-3 mb-3">
+                                @TempData["userNumber"]
+                            </h3>
+                            <p class="mb-0 text-muted">
+                                <span class="text-success mr-2"><i class="mdi mdi-arrow-up-bold"></i> 5.27%</span>
+                                <span class="text-nowrap">Since last month</span>
+                            </p>
+                        </div> <!-- end card-body-->
+                    </div> <!-- end card-->
+                </div> <!-- end col-->
+
+
+                <div class="col-lg-3">
+                    <div class="card widget-flat">
+                        <div class="card-body">
+                            <div class="float-right">
+                                <i class="mdi mdi-cart-plus widget-icon bg-success-lighten text-success"></i>
+                            </div>
+                            <h5 class="text-muted font-weight-normal mt-0" title="Number of Orders">Total Tasks</h5>
+                            <h3 class="mt-3 mb-3"> @Model.Task.Count() </h3>
+                            <p class="mb-0 text-muted">
+                                <span class="text-danger mr-2"><i class="mdi mdi-arrow-down-bold"></i> 1.08%</span>
+                                <span class="text-nowrap">Since last month</span>
+                            </p>
+                        </div> <!-- end card-body-->
+                    </div> <!-- end card-->
+                </div> <!-- end col-->
+
+                <div class="col-lg-3">
+                    <div class="card widget-flat">
+                        <div class="card-body">
+                            <div class="float-right">
+                                <i class="mdi mdi-cart-plus widget-icon bg-success-lighten text-success"></i>
+                            </div>
+                            <h5 class="text-muted font-weight-normal mt-0" title="Number of Orders">In Progress</h5>
+                            <h3 class="mt-3 mb-3"> @Model.Task.Where(x => x.StatusId == 1).Count() </h3>
+                            <p class="mb-0 text-muted">
+                                <span class="text-danger mr-2"><i class="mdi mdi-arrow-down-bold"></i> 1.08%</span>
+                                <span class="text-nowrap">Since last month</span>
+                            </p>
+                        </div> <!-- end card-body-->
+                    </div> <!-- end card-->
+                </div> <!-- end col-->
+
+                <div class="col-lg-3">
+                    <div class="card widget-flat">
+                        <div class="card-body">
+                            <div class="float-right">
+                                <i class="mdi mdi-cart-plus widget-icon bg-success-lighten text-success"></i>
+                            </div>
+                            <h5 class="text-muted font-weight-normal mt-0" title="Number of Orders">Done</h5>
+                            <h3 class="mt-3 mb-3"> @Model.Task.Where(x => x.StatusId == 3).Count() </h3>
+                            <p class="mb-0 text-muted">
+                                <span class="text-danger mr-2"><i class="mdi mdi-arrow-down-bold"></i> 1.08%</span>
+                                <span class="text-nowrap">Since last month</span>
+                            </p>
+                        </div> <!-- end card-body-->
+                    </div> <!-- end card-->
+                </div> <!-- end col-->
+            </div> <!-- end row -->
+
+        </div>
+    }
+
+    //SUPPORT
+    else if (status.Id == 7)
+    {
+        <div class="col-xl-5 col-lg-12 pt-4">
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="card widget-flat">
+                        <div class="card-body">
+                            <div class="float-right">
+                                <i class="mdi mdi-account-multiple widget-icon"></i>
+                            </div>
+                            <h5 class="text-muted font-weight-normal mt-0" title="Number of Customers">Total Customer</h5>
+                            <h3 class="mt-3 mb-3">
+                                @TempData["customerNumber"]
+                            </h3>
+                            <p class="mb-0 text-muted">
+                                <span class="text-success mr-2"><i class="mdi mdi-arrow-up-bold"></i> 5.27%</span>
+                                <span class="text-nowrap">Since last month</span>
+                            </p>
+                        </div> <!-- end card-body-->
+                    </div> <!-- end card-->
+                </div> <!-- end col-->
+            </div>
+        </div>
+    }
+
+
+    //CUSTOMER
+    else if (status.Id == 5)
+    {
+        @Html.Partial("CustomerHomeIndex", @Model)
+    }
+
+}
+
+
